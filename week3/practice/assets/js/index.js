@@ -1,9 +1,14 @@
 $(document).ready(function() {
+  var joke;
+  var text;
   var callback = function(err, res) {
     if (err) {
-      window.alert(err);
+      console.log(err);
+      window.alert('ha fagt. ur request failed LMAOOOOOO')
     } else {
-      window.alert(res);
+      console.log(res);
+      joke = res.text;
+      text = '"' + joke + '"';
     }
   }
   var inputs = {
@@ -13,26 +18,18 @@ $(document).ready(function() {
   }
 
   var memes = function() {
-    alert('hi');
     $("#button").click(function() {
-      window.alert('what');
+      //window.alert(joke);
       var input = $("#input").val();
-      console.log(input);
+      $('#user').text("You said: " + input);
+      $('#text').text("Chuck Norris says:" + joke)
     });
   }
 
-  var hello = function(err, res) {
-    console.log('ahskfjhlasdkjfhdslakjfas');
-    if (err) {
-      alert('fail');
-    } else {
-      alert('pass');
-    }
-  }
-  // superagent.get("http://webtier2016.christianle.com/v1/color")
-  //   .end(callback);
+   superagent.get("http://api.icndb.com/jokes/random")
+     .end(callback);
 
   superagent.post("http://webtier2016.christianle.com/v1/contact")
     .send(inputs)
-    .end(hello);
+    .end(memes);
 });
